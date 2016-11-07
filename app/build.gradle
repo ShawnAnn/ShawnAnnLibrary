@@ -1,0 +1,142 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+List<String> dirs = ['main']
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    defaultConfig {
+        applicationId "com.shawn.shawnannlibrary"
+        minSdkVersion 14
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            dirs.each { dir ->
+                java.srcDirs "src/${dir}/java"
+                res.srcDirs "src/${dir}/res"
+                assets.srcDirs "src/${dir}/assets"
+                resources.srcDirs "src/${dir}/resources"
+            }
+            def libDir = file("src/library");
+            libDir.list().each { dir ->
+                java.srcDirs "src/library/${dir}/java"
+                res.srcDirs "src/library/${dir}/res"
+                assets.srcDirs "src/library/${dir}/assets"
+                resources.srcDirs "src/library/${dir}/resources"
+                jniLibs.srcDirs "src/library/${dir}/jniLibs"
+                //aidl.srcDirs "library/${dir}/aidl"
+            }
+
+            /* libDir = file("src/module");
+             libDir.list().each { dir ->
+                 java.srcDirs "src/module/${dir}/java"
+                 res.srcDirs "src/module/${dir}/res"
+                 assets.srcDirs "src/module/${dir}/assets"
+                 resources.srcDirs "src/module/${dir}/resources"
+                 jniLibs.srcDirs "src/module/${dir}/jniLibs"
+             }*/
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:24.2.0'
+}
+
+// 根节点添加
+version = "0.1"
+// 根节点添加
+def siteUrl = 'https://github.com/ShawnAnn/ShawnAnnLibrary'    // project homepage
+def gitUrl = 'https://github.com/ShawnAnn/ShawnAnnLibrary.git' // project git
+// 根节点添加
+group = "com.shawnann.library"
+// 根节点添加
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                name 'ShawnAnn Library For Android'
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'annshawn'
+                        name 'Shawn.Ann'
+                        email '1904508978@qq.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+boolean isHasFile = false
+if (project.rootProject.findProject('local.properties') != null){
+    isHasFile = true
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+bintray {
+    user = isHasFile ? properties.getProperty("bintray.user") : System.getenv("bintray.user")
+    key = isHasFile ? properties.getProperty("bintray.apikey") : System.getenv("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = "lesscode"                                                 // #CONFIG# project name in jcenter
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
