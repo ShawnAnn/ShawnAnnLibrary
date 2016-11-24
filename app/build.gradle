@@ -60,6 +60,12 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:24.2.0'
+
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.google.code.gson:gson:2.6.2'
+
+
 }
 
 // 根节点添加
@@ -106,6 +112,12 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
@@ -123,7 +135,7 @@ artifacts {
 
 Properties properties = new Properties()
 boolean isHasFile = false
-if (project.rootProject.findProject('local.properties') != null){
+if (project.rootProject.findProject('local.properties') != null) {
     isHasFile = true
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
 }
@@ -133,7 +145,8 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "lesscode"                                                 // #CONFIG# project name in jcenter
+        name = "lesscode"
+        // #CONFIG# project name in jcenter
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
