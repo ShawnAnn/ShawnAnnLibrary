@@ -1,3 +1,11 @@
+/*
+ * Created by ShawnAnn on 16-11-25 上午10:52
+ * This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
+ * My email : annshawn518@gamil.com
+ * My QQ：1904508978
+ * Copyright (c) 2016. All rights reserved.
+ */
+
 package com.shawnann.basic.widgets;
 
 import android.content.Context;
@@ -17,15 +25,16 @@ import android.view.ViewConfiguration;
 import android.view.ViewParent;
 import android.widget.CheckBox;
 
-import com.nineton.wsgj.utils.DesentyUtil;
-import com.nineton.wsgj.utils.ResUtil;
-import com.nineton.wsgj.utils.ShawnImageUtil;
-
-import cn.nineton.wsgj.core.R;
+import com.shawn.shawnannlibrary.R;
+import com.shawnann.basic.util.DesentyUtil;
+import com.shawnann.basic.util.ResUtil;
 
 /**
  * 仿IOS开关按钮
- * Created by Shawn on 2016/4/27.
+ * SwitchButton like IOS
+ *
+ * @author ShawnAnn
+ * @since 2016/11/24
  */
 public class SwitchButton extends CheckBox {
     private Paint mPaint;
@@ -78,15 +87,40 @@ public class SwitchButton extends CheckBox {
         init(context, attrs);
     }
 
+    /**
+     * 修改背景颜色
+     *
+     * @param colorID 背景颜色ID
+     */
     public void changeColor(int colorID) {
         color = ResUtil.getColor(colorID);
         bmBgGreen = null;
         bmBgGreen = BitmapFactory.decodeResource(getResources(),
                 R.drawable.switch_btn_bg_white);
-        bmBgGreen = ShawnImageUtil.getAlphaBitmap(bmBgGreen, color);
+        bmBgGreen = getAlphaBitmap(bmBgGreen, color);
         bmCurBgPic = mChecked ? bmBgGreen : bmBgWhite;// 初始背景图片
         invalidate();
     }
+
+    /**
+     * 修改图片到指定颜色
+     *
+     * @param mBitmap 待透明层的原图
+     * @param mColor  生成目标颜色
+     * @return
+     */
+    public Bitmap getAlphaBitmap(Bitmap mBitmap, int mColor) {
+        Bitmap mAlphaBitmap = Bitmap.createBitmap(mBitmap.getWidth(), mBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas mCanvas = new Canvas(mAlphaBitmap);
+        Paint mPaint = new Paint();
+        mPaint.setColor(mColor);
+        //从原位图中提取只包含alpha的位图
+        Bitmap alphaBitmap = mBitmap.extractAlpha();
+        //在画布上（mAlphaBitmap）绘制alpha位图
+        mCanvas.drawBitmap(alphaBitmap, 0, 0, mPaint);
+        return mAlphaBitmap;
+    }
+
 
     private void init(Context context, AttributeSet attrs) {
         mPaint = new Paint();
@@ -120,7 +154,7 @@ public class SwitchButton extends CheckBox {
         bmBgGreen = BitmapFactory.decodeResource(resources,
                 R.drawable.switch_btn_bg_white);
         // 改成系统需要的颜色
-        bmBgGreen = ShawnImageUtil.getAlphaBitmap(bmBgGreen, color);
+        bmBgGreen = getAlphaBitmap(bmBgGreen, color);
 
         bmBgWhite = BitmapFactory.decodeResource(resources,
                 R.drawable.switch_btn_bg_white);

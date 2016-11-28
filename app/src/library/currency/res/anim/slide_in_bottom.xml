@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+  ~ Created by ShawnAnn on 16-11-25 上午11:51
+  ~ This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
+  ~ My email : annshawn518@gamil.com
+  ~ My QQ：1904508978
+  ~ Copyright (c) 2016. All rights reserved.
+  -->
+
 <translate xmlns:android="http://schemas.android.com/apk/res/android"
            android:fromYDelta="100%p"
            android:toYDelta="0%p"
-           android:duration="100"/>
+           android:duration="300"/>

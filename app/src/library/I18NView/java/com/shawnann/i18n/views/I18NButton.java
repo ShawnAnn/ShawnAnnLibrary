@@ -1,5 +1,5 @@
 /*
- * Created by ShawnAnn on 16-11-25 下午2:58
+ * Created by ShawnAnn on 16-11-25 下午3:02
  * This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
  * My email : annshawn518@gamil.com
  * My QQ：1904508978
@@ -13,7 +13,7 @@ import android.util.AttributeSet;
 import android.widget.Button;
 
 import com.shawnann.i18n.tran.I18N;
-import com.youloft.calendar.almanac.tran.I18N;
+
 
 /**
  * Created by Shawn on 2015/7/23.

@@ -1,11 +1,10 @@
 /*
- * Created by ShawnAnn on 16-11-25 下午2:58
+ * Created by ShawnAnn on 16-11-25 下午2:59
  * This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
  * My email : annshawn518@gamil.com
  * My QQ：1904508978
  * Copyright (c) 2016. All rights reserved.
  */
-
 package com.shawnann.i18n.tran;
 
 import android.content.Context;
@@ -13,6 +12,7 @@ import android.content.Context;
 import java.util.Locale;
 
 /**
+ * 另类的繁体转换
  * Created by Shawn on 14-8-16.
  */
 public class I18N {
@@ -22,6 +22,7 @@ public class I18N {
 
     /**
      * 初始化
+     * 必须在控件使用之前先调用
      *
      * @param context
      */

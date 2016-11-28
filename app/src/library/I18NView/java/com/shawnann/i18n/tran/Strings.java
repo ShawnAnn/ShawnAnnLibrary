@@ -1,3 +1,11 @@
+/*
+ * Created by ShawnAnn on 16-11-25 下午3:00
+ * This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
+ * My email : annshawn518@gamil.com
+ * My QQ：1904508978
+ * Copyright (c) 2016. All rights reserved.
+ */
+
 package com.shawnann.i18n.tran;
 
 
@@ -11,17 +19,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Strings {
-    public static boolean isEmpty(String content) {
-        return content == null || "".equals(content);
-    }
-
-    public static boolean Eq(String str1, String str2) {
-       /* if (str1 == null || str2 == null)
-            return false;
-        return str1.equals(str2);*/
-
-        return !(str1 == null || str2 == null) && str1.equals(str2);
-    }
 
     /**
      * 读文件内容到String中

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by ShawnAnn on 16-11-23 上午11:14
+  ~ This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
+  ~ My email : annshawn518@gamil.com
+  ~ My QQ：1904508978
+  ~  Copyright (c) 2016. All rights reserved.
+  -->
+
+<resources>
+    <declare-styleable name="Emojicon">
+        <attr name="emojiconSize" format="dimension" />
+        <attr name="emojiconAlignment" format="enum">
+            <enum name="bottom" value="0" />
+            <enum name="baseline" value="1" />
+        </attr>
+        <attr name="emojiconTextStart" format="integer" />
+        <attr name="emojiconTextLength" format="integer" />
+        <attr name="emojiconUseSystemDefault" format="boolean" />
+    </declare-styleable>
+</resources>

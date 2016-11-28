@@ -16,7 +16,7 @@ import android.view.View;
 import com.shawnann.basic.util.UserConfigUtil;
 
 /**
- * 整体项目的基础
+ * 整体项目的基础Fragment
  * The baseFragment of the project
  *
  * @author ShawnAnn

@@ -1,3 +1,11 @@
+/*
+ * Created by ShawnAnn on 16-11-25 上午10:56
+ * This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
+ * My email : annshawn518@gamil.com
+ * My QQ：1904508978
+ * Copyright (c) 2016. All rights reserved.
+ */
+
 package com.shawnann.basic.util;
 
 import android.content.Context;
@@ -5,8 +13,8 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 /**
- * Created by Shawn on 2016/3/3.
- * 像素适配工具
+ * @author ShawnAnn
+ * @since 2016/3/3.
  */
 public class DesentyUtil {
 

@@ -163,7 +163,7 @@ public class AppContext {
      * 获取android系统版本号
      * get android system version code
      *
-     * @return 系统版本号, 比如4.3、6。0、7.0等
+     * @return 系统版本号, 比如4.3、6.0、7.0等
      * system version code like 4.3...
      */
     public static String getSystemVersionCode() {

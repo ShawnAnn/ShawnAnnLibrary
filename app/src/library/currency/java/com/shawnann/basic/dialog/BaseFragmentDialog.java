@@ -1,32 +1,43 @@
+/*
+ * Created by ShawnAnn on 16-11-25 上午11:44
+ * This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
+ * My email : annshawn518@gamil.com
+ * My QQ：1904508978
+ * Copyright (c) 2016. All rights reserved.
+ */
+
 package com.shawnann.basic.dialog;
 
 import android.app.Dialog;
-import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
-import cn.nineton.wsgj.core.R;
+import com.shawn.shawnannlibrary.R;
+import com.shawnann.basic.util.UserConfigUtil;
+
 
 /**
+ * * 整体项目的基础对话框
+ * The baseFragmentDialog of the project
  *
- * Created by ShawnAnn on 2016/10/10.
+ * @author ShawnAnn
+ * @since 2016/4/21.
  */
 
 public class BaseFragmentDialog extends DialogFragment {
 
     public Dialog mDialog = null;
 
-    private void ignoreUserFont() {
-        Configuration config = getResources().getConfiguration();
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        config.fontScale = 1.0f;
-        getResources().updateConfiguration(config, dm);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        UserConfigUtil.ignoreUserFont(getContext());
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by ShawnAnn on 16-11-23 上午11:14
+  ~ This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
+  ~ My email : annshawn518@gamil.com
+  ~ My QQ：1904508978
+  ~  Copyright (c) 2016. All rights reserved.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+    <com.shawnann.emoji.widgets.EmojiconEditText
+        android:id="@+id/wechat_message_content"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:gravity="left"
+        android:hint="请输入消息内容（必填）"
+        android:lineSpacingExtra="10dp"
+        emojicon:emojiconSize="24sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:id="@+id/default_bq"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="QQ表情" />
+
+
+            <TextView
+                android:id="@+id/emoji_bq"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Emoji表情" />
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/message_emoji_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="240dp" />
+
+    </LinearLayout>
+</LinearLayout>

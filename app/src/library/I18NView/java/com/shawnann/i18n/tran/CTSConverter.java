@@ -1,17 +1,13 @@
 /*
- * Created by ShawnAnn on 16-11-25 下午2:58
+ * Created by ShawnAnn on 16-11-25 下午2:59
  * This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
  * My email : annshawn518@gamil.com
  * My QQ：1904508978
  * Copyright (c) 2016. All rights reserved.
  */
-
 package com.shawnann.i18n.tran;
 
 import android.content.Context;
-
-
-import com.youloft.calendar.calendar.utils.Strings;
 
 import java.util.HashMap;
 

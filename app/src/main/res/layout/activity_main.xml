@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -10,8 +11,42 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.shawn.shawnannlibrary.MainActivity">
 
+    <com.shawnann.emoji.widgets.EmojiconEditText
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        emojicon:emojiconSize="24sp" />
 
-    <com.shawnann.basic.widgets.SlideBord
+    <!-- 中华主页面测试 -->
+    <!--<com.shawnann.basic.widgets.SlideBox
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:clickable="true"
+            android:background="@android:color/holo_orange_dark" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:clickable="true"
+            android:background="@android:color/holo_red_dark" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:clickable="true"
+            android:background="@android:color/holo_green_dark" />
+
+
+    </com.shawnann.basic.widgets.SlideBox>
+-->
+
+
+    <!-- 上下左右十字布局测试 -->
+    <!--<com.shawnann.basic.widgets.SlideBord
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -50,5 +85,5 @@
             android:background="@android:color/holo_purple"
             android:text="4" />
 
-    </com.shawnann.basic.widgets.SlideBord>
+    </com.shawnann.basic.widgets.SlideBord>-->
 </RelativeLayout>

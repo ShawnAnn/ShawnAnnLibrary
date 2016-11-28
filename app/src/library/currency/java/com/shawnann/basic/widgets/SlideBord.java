@@ -18,13 +18,16 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Scroller;
 
-import com.shawnann.basic.util.LogUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ShawnAnn on 2016/11/24.
+ * 可以上下左右滑动的布局(必须包含5个子布局，并且每个子布局能够消费触摸事件)
+ * A ViewGroup which can slide up\down\left\right
+ * （There must 5 views/viewgroups which must be clickable inside this viewgroup）
+ *
+ * @author ShawnAnn
+ * @since 2016/11/24
  */
 
 public class SlideBord extends FrameLayout {
@@ -111,7 +114,6 @@ public class SlideBord extends FrameLayout {
                 downX = ev.getX();
                 downY = ev.getY();
                 type_HV = -1;
-                LogUtil.i("按下");
                 break;
             case MotionEvent.ACTION_MOVE://确定type_HV（水平/垂直）
                 float x = ev.getX();
@@ -125,7 +127,6 @@ public class SlideBord extends FrameLayout {
                         type_HV = TYPE_V;
                         requestDisallowInterceptTouchEvent(true);
                     }
-                    LogUtil.i("移动方向" + type_HV);
                 }
                 break;
         }
@@ -146,10 +147,8 @@ public class SlideBord extends FrameLayout {
             case MotionEvent.ACTION_DOWN:
                 downX = event.getX();
                 downY = event.getY();
-                LogUtil.i("获取点击点做标");
                 break;
             case MotionEvent.ACTION_MOVE:
-                LogUtil.i("移动");
                 if (type_HV == TYPE_HOR) {
                     //移动的距离
                     int move = (int) (event.getX() - downX + move_plus_x);
@@ -161,7 +160,6 @@ public class SlideBord extends FrameLayout {
                     } else if (slide_orientation == DRAG_TYPE_RIGHT) {
                         move = move < 0 ? 0 : move;
                     }
-                    LogUtil.i("左右移动" + move);
                     //移动
                     scrollTo(-move, 0);
                 } else {
@@ -174,14 +172,12 @@ public class SlideBord extends FrameLayout {
                     } else if (slide_orientation == DRAG_TYPE_BOTTOM) {
                         move = move < 0 ? 0 : move;
                     }
-                    LogUtil.i("上下移动" + move);
                     //移动
                     scrollTo(0, -move);
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                LogUtil.i("抬起");
                 if (type_HV == TYPE_HOR) {
                     float x1 = event.getX();
                     int movex = (int) (x1 - downX);

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by ShawnAnn on 16-11-23 上午11:14
+  ~ This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
+  ~ My email : annshawn518@gamil.com
+  ~ My QQ：1904508978
+  ~  Copyright (c) 2016. All rights reserved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="50dp"
+    android:layout_height="60dp">
+
+    <ImageView
+        android:id="@+id/item_emoji_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:scaleType="fitCenter" />
+
+</RelativeLayout>
