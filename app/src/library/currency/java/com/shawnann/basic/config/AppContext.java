@@ -145,7 +145,7 @@ public class AppContext {
         if (mPackageInfo != null) {
             return mPackageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
         }
-        return "未知";
+        return "ShawnAnn";
     }
 
     /**

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by ShawnAnn on 16-11-23 上午11:14
+  ~ This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
+  ~ My email : annshawn518@gamil.com
+  ~ My QQ：1904508978
+  ~  Copyright (c) 2016. All rights reserved.
+  -->
+
+<resources>
+    <item name="small_id" type="id">84778</item>
+    <item name="fullscreen_id" type="id">85597</item>
+</resources>

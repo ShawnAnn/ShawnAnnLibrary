@@ -1,0 +1,106 @@
+/*
+ * Created by ShawnAnn on 16-11-23 上午11:14
+ * This is a personal tool library for usual coding,if you have any good idea,welcome pull requests.
+ * My email : annshawn518@gamil.com
+ * My QQ：1904508978
+ *  Copyright (c) 2016. All rights reserved.
+ */
+
+package com.shawnann.videoplayer;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.TextureView;
+
+/**
+ * 视频展示TextureView
+ */
+
+public class SATextureView extends TextureView {
+    public SATextureView(Context context) {
+        super(context);
+    }
+
+    public SATextureView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        int videoWidth = SAVideoManager.instance().getCurrentVideoWidth();
+        int videoHeight = SAVideoManager.instance().getCurrentVideoHeight();
+
+        int width = getDefaultSize(videoWidth, widthMeasureSpec);
+        int height = getDefaultSize(videoHeight, heightMeasureSpec);
+
+        int widthS = getDefaultSize(videoWidth, widthMeasureSpec);
+        int heightS = getDefaultSize(videoHeight, heightMeasureSpec);
+
+
+        if (videoWidth > 0 && videoHeight > 0) {
+
+            int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+            int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+            int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+            int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+
+            if (widthSpecMode == MeasureSpec.EXACTLY && heightSpecMode == MeasureSpec.EXACTLY) {
+                width = widthSpecSize;
+                height = heightSpecSize;
+
+                if (videoWidth * height < width * videoHeight) {
+                    width = height * videoWidth / videoHeight;
+                } else if (videoWidth * height > width * videoHeight) {
+                    height = width * videoHeight / videoWidth;
+                }
+            } else if (widthSpecMode == MeasureSpec.EXACTLY) {
+                width = widthSpecSize;
+                height = width * videoHeight / videoWidth;
+                if (heightSpecMode == MeasureSpec.AT_MOST && height > heightSpecSize) {
+                    height = heightSpecSize;
+                }
+            } else if (heightSpecMode == MeasureSpec.EXACTLY) {
+                height = heightSpecSize;
+                width = height * videoWidth / videoHeight;
+                if (widthSpecMode == MeasureSpec.AT_MOST && width > widthSpecSize) {
+                    width = widthSpecSize;
+                }
+            } else {
+                width = videoWidth;
+                height = videoHeight;
+                if (heightSpecMode == MeasureSpec.AT_MOST && height > heightSpecSize) {
+                    height = heightSpecSize;
+                    width = height * videoWidth / videoHeight;
+                }
+                if (widthSpecMode == MeasureSpec.AT_MOST && width > widthSpecSize) {
+                    width = widthSpecSize;
+                    height = width * videoHeight / videoWidth;
+                }
+            }
+        } else {
+            // no size yet, just adopt the given spec sizes
+        }
+
+        if (getRotation() != 0 && getRotation() % 90 == 0) {
+            if (widthS < heightS) {
+                if (width > height) {
+                    width = (int) (width * (float) widthS / height);
+                    height = widthS;
+                } else {
+                    height = (int) (height * (float) width / widthS);
+                    width = widthS;
+                }
+            } else {
+                if (width > height) {
+                    height = (int) (height * (float) width / widthS);
+                    width = widthS;
+                } else {
+                    width = (int) (width * (float) widthS / height);
+                    height = widthS;
+                }
+            }
+        }
+        setMeasuredDimension(width, height);
+    }
+}
