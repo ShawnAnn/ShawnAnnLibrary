@@ -21,7 +21,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 /**
- * 获取系统相关信息
+ * 获取App相关信息
  * get information about current App
  * 使用之前必须现在Application文件中调用{@link #initAppContext(Context)}方法
  * you must call {@link #initAppContext(Context)} before you use the methods of this class
@@ -146,80 +146,6 @@ public class AppContext {
             return mPackageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
         }
         return "ShawnAnn";
-    }
-
-    /**
-     * 得到系统名称
-     * get current os
-     *
-     * @return just return Android OS
-     */
-    public static String getSystemName() {
-        // return System.getProperty("os.name");
-        return "Android OS";
-    }
-
-    /**
-     * 获取android系统版本号
-     * get android system version code
-     *
-     * @return 系统版本号, 比如4.3、6.0、7.0等
-     * system version code like 4.3...
-     */
-    public static String getSystemVersionCode() {
-        return Build.VERSION.RELEASE;
-    }
-
-    /**
-     * 获取设备型号
-     * get the mobile name
-     *
-     * @return 设备型号, 比如HUAWEI P9
-     */
-    public static String getMobileName() {
-        return Build.MODEL;
-    }
-
-    /**
-     * 得到运营商名字(中国)
-     * get the sim operator information(China)
-     *
-     * @return
-     */
-    public static String getSimOperatorInfo() {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String operatorString = telephonyManager.getSimOperator();
-        if (operatorString == null) {
-            return "未知";
-        }
-        if (operatorString.equals("46000") || operatorString.equals("46002")) {
-            return "中国移动";
-        } else if (operatorString.equals("46001")) {
-
-            return "中国联通";
-        } else if (operatorString.equals("46003")) {
-            return "中国电信";
-        } else {
-            return "未知";
-        }
-    }
-
-    /**
-     * 得到手机唯一码
-     * 此处唯一码为设备号和Mac地址组合
-     * get the unicode of the cell phone
-     * use deviceID and MacAddress
-     *
-     * @return
-     */
-    public static String getIDFA(Context context) {
-        //imei值
-        TelephonyManager TelephonyMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String szImei = TelephonyMgr.getDeviceId();
-        // MAC值
-        WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        String m_szWLANMAC = wm.getConnectionInfo().getMacAddress();
-        return "android:" + szImei + m_szWLANMAC;
     }
 
 

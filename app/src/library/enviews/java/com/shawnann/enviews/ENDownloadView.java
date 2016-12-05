@@ -6,7 +6,7 @@
  *  Copyright (c) 2016. All rights reserved.
  */
 
-package com.shawnann.videoplayer.widgets;
+package com.shawnann.enviews;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -25,13 +25,12 @@ import android.view.animation.OvershootInterpolator;
 
 import com.shawn.shawnannlibrary.R;
 
-
 /**
- * 加载中自定义控件，借(CAO)鉴(XI)自EnViews
- * ENViews, A cool dynamic view library.All designed by Nick Buturishvili
+ * Created by codeest on 2016/11/9.
  *
- * @see <a href="https://github.com/codeestX/ENViews">EnViews</a>
+ * 感觉是这个系列里设计的最赞的一款了 >//<
  */
+
 public class ENDownloadView extends View {
 
     private static final int STATE_PRE = 0;
@@ -80,7 +79,7 @@ public class ENDownloadView extends View {
 
     private Path mPath;
 
-    private RectF mRectF, mClipRectF;
+    private RectF mRectF ,mClipRectF;
 
     private float mFraction;
 
@@ -90,14 +89,14 @@ public class ENDownloadView extends View {
 
     private float mBaseLength, mCircleRadius, mBaseRippleLength;
 
-    public enum DownloadUnit {
+    public static enum DownloadUnit {
         GB,
         MB,
         KB,
         B,
         NONE;
 
-        DownloadUnit() {
+        private DownloadUnit() {
         }
     }
 
@@ -108,13 +107,13 @@ public class ENDownloadView extends View {
     public ENDownloadView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.video_download);
-        int lineColor = ta.getColor(R.styleable.video_download_download_line_color, DEFAULT_LINE_COLOR);
-        int bgLineColor = ta.getColor(R.styleable.video_download_download_bg_line_color, DEFAULT_BG_LINE_COLOR);
-        int textColor = ta.getColor(R.styleable.video_download_download_text_color, DEFAULT_TEXT_COLOR);
-        int lineWidth = ta.getInteger(R.styleable.video_download_download_line_width, DEFAULT_LINE_WIDTH);
-        int bgLineWidth = ta.getInteger(R.styleable.video_download_download_bg_line_width, DEFAULT_BG_LINE_WIDTH);
-        int textSize = ta.getInteger(R.styleable.video_download_download_text_size, DEFAULT_TEXT_SIZE);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.download);
+        int lineColor = ta.getColor(R.styleable.download_download_line_color, DEFAULT_LINE_COLOR);
+        int bgLineColor = ta.getColor(R.styleable.download_download_bg_line_color, DEFAULT_BG_LINE_COLOR);
+        int textColor = ta.getColor(R.styleable.download_download_text_color, DEFAULT_TEXT_COLOR);
+        int lineWidth = ta.getInteger(R.styleable.download_download_line_width, DEFAULT_LINE_WIDTH);
+        int bgLineWidth = ta.getInteger(R.styleable.download_download_bg_line_width, DEFAULT_BG_LINE_WIDTH);
+        int textSize = ta.getInteger(R.styleable.download_download_text_size, DEFAULT_TEXT_SIZE);
         ta.recycle();
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -154,47 +153,47 @@ public class ENDownloadView extends View {
         mBaseRippleLength = 4.4f * mBaseLength / 12;
         mCurrentRippleX = mCenterX - mBaseRippleLength * 10;
         mRectF = new RectF(mCenterX - mCircleRadius, mCenterY - mCircleRadius, mCenterX + mCircleRadius, mCenterY + mCircleRadius);
-        mClipRectF = new RectF(mCenterX - 6 * mBaseRippleLength, 0, mCenterX + 6 * mBaseRippleLength, mHeight);
+        mClipRectF = new RectF(mCenterX - 6 * mBaseRippleLength, 0 , mCenterX + 6 * mBaseRippleLength , mHeight);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         switch (mCurrentState) {
-            case STATE_PRE:
+            case STATE_PRE: //嗷~ 开始阶段：线弹起小球
                 if (mFraction <= 0.4) {
-                    canvas.drawCircle(mCenterX, mCenterY, mCircleRadius, mBgPaint);
+                    canvas.drawCircle(mCenterX, mCenterY ,mCircleRadius, mBgPaint);
                     canvas.drawLine(mCenterX - mBaseLength, mCenterY, mCenterX, mCenterY + mBaseLength, mPaint);
-                    canvas.drawLine(mCenterX, mCenterY + mBaseLength, mCenterX + mBaseLength, mCenterY, mPaint);
-                    canvas.drawLine(mCenterX, mCenterY + mBaseLength - 1.3f * mBaseLength / 0.4f * mFraction,
+                    canvas.drawLine(mCenterX, mCenterY + mBaseLength, mCenterX + mBaseLength ,mCenterY , mPaint);
+                    canvas.drawLine(mCenterX , mCenterY + mBaseLength - 1.3f * mBaseLength / 0.4f * mFraction,
                             mCenterX, mCenterY - 1.6f * mBaseLength + 1.3f * mBaseLength / 0.4f * mFraction, mPaint);
-                } else if (mFraction <= 0.6) {
-                    canvas.drawCircle(mCenterX, mCenterY, mCircleRadius, mBgPaint);
-                    canvas.drawCircle(mCenterX, mCenterY - 0.3f * mBaseLength, 2, mPaint);
+                } else if(mFraction <= 0.6) {
+                    canvas.drawCircle(mCenterX, mCenterY ,mCircleRadius, mBgPaint);
+                    canvas.drawCircle(mCenterX, mCenterY -0.3f * mBaseLength , 2, mPaint);
                     canvas.drawLine(mCenterX - mBaseLength - mBaseLength * 1.2f / 0.2f * (mFraction - 0.4f), mCenterY, mCenterX, mCenterY + mBaseLength - mBaseLength / 0.2f * (mFraction - 0.4f), mPaint);
-                    canvas.drawLine(mCenterX, mCenterY + mBaseLength - mBaseLength / 0.2f * (mFraction - 0.4f), mCenterX + mBaseLength + mBaseLength * 1.2f / 0.2f * (mFraction - 0.4f), mCenterY, mPaint);
-                } else if (mFraction <= 1) {
-                    canvas.drawCircle(mCenterX, mCenterY, mCircleRadius, mBgPaint);
-                    canvas.drawCircle(mCenterX, mCenterY - 0.3f * mBaseLength - (mCircleRadius - 0.3f * mBaseLength) / 0.4f * (mFraction - 0.6f), 2, mPaint);
-                    canvas.drawLine(mCenterX - mBaseLength * 2.2f, mCenterY, mCenterX + mBaseLength * 2.2f, mCenterY, mPaint);
+                    canvas.drawLine(mCenterX, mCenterY + mBaseLength - mBaseLength / 0.2f * (mFraction - 0.4f), mCenterX + mBaseLength + mBaseLength * 1.2f / 0.2f * (mFraction - 0.4f) ,mCenterY , mPaint);
+                } else if (mFraction <= 1){
+                    canvas.drawCircle(mCenterX, mCenterY ,mCircleRadius, mBgPaint);
+                    canvas.drawCircle(mCenterX, mCenterY -0.3f * mBaseLength - (mCircleRadius - 0.3f * mBaseLength) / 0.4f * (mFraction - 0.6f), 2, mPaint);
+                    canvas.drawLine(mCenterX - mBaseLength * 2.2f , mCenterY , mCenterX + mBaseLength * 2.2f, mCenterY, mPaint);
                 } else {
-                    canvas.drawCircle(mCenterX, mCenterY, mCircleRadius, mBgPaint);
-                    canvas.drawCircle(mCenterX, mCenterY - mCircleRadius - mBaseLength * 3 * (mFraction - 1), 3, mPaint);
-                    canvas.drawLine(mCenterX - mBaseLength * 2.2f, mCenterY, mCenterX + mBaseLength * 2.2f, mCenterY, mPaint);
+                    canvas.drawCircle(mCenterX, mCenterY ,mCircleRadius, mBgPaint);
+                    canvas.drawCircle(mCenterX, mCenterY - mCircleRadius - mBaseLength * 3 * (mFraction - 1), 3 ,mPaint);
+                    canvas.drawLine(mCenterX - mBaseLength * 2.2f , mCenterY , mCenterX + mBaseLength * 2.2f, mCenterY, mPaint);
                 }
                 break;
-            case STATE_DOWNLOADING:
+            case STATE_DOWNLOADING: //嗷~ 下载阶段：波浪线与文字
                 if (mFraction <= 0.2) {
                     mTextPaint.setTextSize(mTextSize / 0.2f * mFraction);
                 }
-                canvas.drawCircle(mCenterX, mCenterY, mCircleRadius, mBgPaint);
-                canvas.drawArc(mRectF, -90, 359.99f * mFraction, false, mPaint);
+                canvas.drawCircle(mCenterX, mCenterY ,mCircleRadius, mBgPaint);
+                canvas.drawArc(mRectF, -90, 359.99f * mFraction, false ,mPaint);
                 mPath.reset();
                 mCurrentRippleX += DEFAULT_RIPPLE_SPEED;
                 if (mCurrentRippleX > mCenterX - mBaseRippleLength * 6)
                     mCurrentRippleX = mCenterX - mBaseRippleLength * 10;
-                mPath.moveTo(mCurrentRippleX, mCenterY);
-                for (int i = 0; i < 4; i++) {
+                mPath.moveTo(mCurrentRippleX , mCenterY);
+                for (int i = 0; i< 4 ; i++) {
                     mPath.rQuadTo(mBaseRippleLength, -(1 - mFraction) * mBaseRippleLength, mBaseRippleLength * 2, 0);
                     mPath.rQuadTo(mBaseRippleLength, (1 - mFraction) * mBaseRippleLength, mBaseRippleLength * 2, 0);
                 }
@@ -203,26 +202,26 @@ public class ENDownloadView extends View {
                 canvas.drawPath(mPath, mPaint);
                 canvas.restore();
                 if (mUnit != DownloadUnit.NONE && mCurrentSize > 0) {
-                    //canvas.drawText(String.format("%.2f", mCurrentSize) + getUnitStr(mUnit), mCenterX , mCenterY + 1.4f * mBaseLength , mTextPaint);
+                    canvas.drawText(String.format("%.2f", mCurrentSize) + getUnitStr(mUnit), mCenterX , mCenterY + 1.4f * mBaseLength , mTextPaint);
                 }
                 break;
-            case STATE_END:
-                canvas.drawCircle(mCenterX, mCenterY, mCircleRadius, mPaint);
+            case STATE_END: //嗷~ 结束阶段：线变勾
+                canvas.drawCircle(mCenterX, mCenterY ,mCircleRadius, mPaint);
                 if (mFraction <= 0.5) {
                     mTextPaint.setTextSize(mTextSize - mTextSize / 0.2f * mFraction);
                 } else {
                     mTextPaint.setTextSize(0);
                 }
                 if (mUnit != DownloadUnit.NONE && mCurrentSize > 0) {
-                    canvas.drawText(String.format("%.2f", mCurrentSize) + getUnitStr(mUnit), mCenterX, mCenterY + 1.4f * mBaseLength, mTextPaint);
+                    canvas.drawText(String.format("%.2f", mCurrentSize) + getUnitStr(mUnit), mCenterX , mCenterY + 1.4f * mBaseLength , mTextPaint);
                 }
                 canvas.drawLine(mCenterX - mBaseLength * 2.2f + mBaseLength * 1.2f * mFraction, mCenterY,
                         mCenterX - mBaseLength * 0.5f, mCenterY + mBaseLength * 0.5f * mFraction * 1.3f, mPaint);
                 canvas.drawLine(mCenterX - mBaseLength * 0.5f, mCenterY + mBaseLength * 0.5f * mFraction * 1.3f,
                         mCenterX + mBaseLength * 2.2f - mBaseLength * mFraction, mCenterY - mBaseLength * mFraction * 1.3f, mPaint);
                 break;
-            case STATE_RESET:
-                canvas.drawCircle(mCenterX, mCenterY, mCircleRadius, mBgPaint);
+            case STATE_RESET:   //嗷~ 复位阶段：勾变箭头
+                canvas.drawCircle(mCenterX, mCenterY ,mCircleRadius, mBgPaint);
                 canvas.drawLine(mCenterX - mBaseLength, mCenterY,
                         mCenterX - mBaseLength * 0.5f + mBaseLength * 0.5f * mFraction, mCenterY + mBaseLength * 0.65f + mBaseLength * 0.35f * mFraction, mPaint);
                 canvas.drawLine(mCenterX - mBaseLength * 0.5f + mBaseLength * 0.5f * mFraction, mCenterY + mBaseLength * 0.65f + mBaseLength * 0.35f * mFraction,
@@ -276,7 +275,7 @@ public class ENDownloadView extends View {
             @Override
             public void onAnimationEnd(Animator animation) {
                 mCurrentState = STATE_END;
-                downloadAnim();
+                endAnim();
             }
         });
         downloadAnim.start();
@@ -357,7 +356,7 @@ public class ENDownloadView extends View {
         return mCurrentState;
     }
 
-    interface OnDownloadStateListener {
+    public interface OnDownloadStateListener {
 
         void onDownloadFinish();
 

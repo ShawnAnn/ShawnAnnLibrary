@@ -37,8 +37,8 @@ import com.shawnann.basic.util.NetStateUtil;
 import com.shawnann.basic.util.ResUtil;
 import com.shawnann.videoplayer.SAVideoPlayer;
 import com.shawnann.videoplayer.listener.StandardVideoAllCallBack;
-import com.shawnann.videoplayer.widgets.ENDownloadView;
-import com.shawnann.videoplayer.widgets.ENPlayView;
+import com.shawnann.enviews.ENDownloadView;
+import com.shawnann.enviews.ENPlayView;
 
 
 import java.io.File;

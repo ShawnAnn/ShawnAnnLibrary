@@ -6,7 +6,7 @@
  *  Copyright (c) 2016. All rights reserved.
  */
 
-package com.shawnann.videoplayer.widgets;
+package com.shawnann.enviews;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -39,9 +39,9 @@ public class ENPlayView extends View {
 
     public static int DEFAULT_BG_LINE_COLOR = 0xfffafafa;
 
-    public static int DEFAULT_LINE_WIDTH = 14;
+    public static int DEFAULT_LINE_WIDTH = 7;
 
-    public static int DEFAULT_BG_LINE_WIDTH = 12;
+    public static int DEFAULT_BG_LINE_WIDTH = 6;
 
     public static int DEFAULT_DURATION = 1200;
 

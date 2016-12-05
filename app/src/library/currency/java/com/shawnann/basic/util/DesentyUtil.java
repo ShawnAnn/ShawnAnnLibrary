@@ -13,6 +13,8 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 /**
+ * 转换相关工具类
+ *
  * @author ShawnAnn
  * @since 2016/3/3.
  */
