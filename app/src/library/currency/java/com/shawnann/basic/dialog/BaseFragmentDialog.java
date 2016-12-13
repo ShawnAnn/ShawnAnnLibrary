@@ -18,7 +18,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.shawn.shawnannlibrary.R;
+import com.shawnann.basic.config.AppContext;
 import com.shawnann.basic.util.UserConfigUtil;
+
+import static com.shawnann.basic.util.UIUtil.getNavigationBarHeight;
+import static com.shawnann.basic.util.UIUtil.getStatusBarHeight;
 
 
 /**
@@ -44,9 +48,15 @@ public class BaseFragmentDialog extends DialogFragment {
         if (mDialog == null) {
             mDialog = new Dialog(getActivity(), R.style.BottomInDialog);
         }
+
+        int screenHeight = (int) AppContext.getScreenHeight();
+        int statusBarHeight = getStatusBarHeight(getContext());
+        int navgateBarHeight = getNavigationBarHeight(getContext());
+        int dialogHeight = screenHeight - statusBarHeight - navgateBarHeight;
+
         Window window = mDialog.getWindow();
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT);
+                dialogHeight == 0 ? ViewGroup.LayoutParams.MATCH_PARENT : dialogHeight);
         window.setGravity(Gravity.BOTTOM);
         mDialog.setCanceledOnTouchOutside(true);
         mDialog.setCancelable(true);

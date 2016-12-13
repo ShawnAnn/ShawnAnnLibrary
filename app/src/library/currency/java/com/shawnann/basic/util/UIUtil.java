@@ -55,6 +55,22 @@ public final class UIUtil {
         return result;
     }
 
+
+    /**
+     * 获取导航栏的高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getNavigationBarHeight(Context context) {
+        int height = 0;
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0)
+            height = resources.getDimensionPixelSize(resourceId);
+        return height;
+    }
+
     /**
      * 获取ActionBar高度
      *
